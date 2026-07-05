@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CV Builder Pro - Créez votre CV académique</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- ========== HEADER ========== -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-file-alt"></i>
+                <span>CV<span>Builder</span>Pro</span>
+            </div>
+            <nav class="nav">
+                <a href="#builder" class="active">Créer</a>
+                <a href="#templates">Modèles</a>
+                <a href="#pricing">Tarifs</a>
+                <button class="btn-primary" id="btnExportPDF"><i class="fas fa-file-pdf"></i> PDF</button>
+            </nav>
+            <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+        </div>
+    </header>
+
+    <!-- ========== HERO ========== -->
+    <section class="hero">
+        <div class="container">
+            <h1>Créez votre CV <span>académique</span> en 5 min</h1>
+            <p>Format optimisé pour les écoles d'ingénieur et concours</p>
+        </div>
+    </section>
+
+    <!-- ========== BUILDER ========== -->
+    <section class="builder" id="builder">
+        <div class="container">
+            <div class="builder-grid">
+
+                <!-- ====== FORMULAIRE ====== -->
+                <div class="form-section">
+                    <h2><i class="fas fa-pen"></i> Remplissez vos informations</h2>
+
+                    <!-- ===== DOMAINE 1 : INFO PERSONNELLES ===== -->
+                    <div class="accordion">
+                        <div class="accordion-header active" data-target="personal">
+                            <span><i class="fas fa-user"></i> Informations personnelles</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </div>
+                        <div class="accordion-body open" id="personal">
+                            <div class="form-group">
+                                <label>Nom complet *</label>
+                                <input type="text" id="fullName" placeholder="Hamza Margal" />
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Nationalité</label>
+                                    <input type="text" id="nationality" placeholder="Marocaine" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Date de naissance</label>
+                                    <input type="text" id="birthDate" placeholder="29/05/2006" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Adresse</label>
+                                <input type="text" id="address" placeholder="Dyar al alya GH5 IMM1 Étage 4 APP18, Mohammedia" />
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Email *</label>
+                                    <input type="email" id="email" placeholder="hamzamargal2005@gmail.com" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Téléphone</label>
+                                    <input type="tel" id="phone" placeholder="+212 781254076" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Liens (GitHub, LinkedIn, etc.)</label>
+                                <input type="text" id="links" placeholder="GitHub: username, LinkedIn: username" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== DOMAINE 2 : OBJECTIF ===== -->
+                    <div class="accordion">
+                        <div class="accordion-header active" data-target="objective">
+                            <span><i class="fas fa-bullseye"></i> Objectif académique</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </div>
+                        <div class="accordion-body open" id="objective">
+                            <div class="form-group">
+                                <label>Votre objectif / projet</label>
+                                <textarea id="objectiveText" rows="4" placeholder="Étudiant en classes préparatoires scientifiques (CPGE), je souhaite poursuivre une formation d'ingénieur en France..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Concours visés</label>
+                                <input type="text" id="contests" placeholder="CCINP, Concours commun Mines-Pont" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== DOMAINE 3 : FORMATION ===== -->
+                    <div class="accordion">
+                        <div class="accordion-header active" data-target="education">
+                            <span><i class="fas fa-graduation-cap"></i> Formation</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </div>
+                        <div class="accordion-body open" id="education">
+                            <div id="educationContainer">
+                                <!-- Ajout dynamique -->
+                            </div>
+                            <button class="btn-add" id="addEducation"><i class="fas fa-plus"></i> Ajouter une formation</button>
+                        </div>
+                    </div>
+
+                    <!-- ===== DOMAINE 4 : COMPÉTENCES INFORMATIQUES ===== -->
+                    <div class="accordion">
+                        <div class="accordion-header active" data-target="skills">
+                            <span><i class="fas fa-code"></i> Compétences informatiques</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </div>
+                        <div class="accordion-body open" id="skills">
+                            <div class="form-group">
+                                <label>Domaines de spécialisation</label>
+                                <input type="text" id="specializations" placeholder="Mathématiques, Physique, Chimie, Informatique, SI" />
+                            </div>
+                            <div class="form-group">
+                                <label>Compétences techniques (séparées par des virgules)</label>
+                                <input type="text" id="techSkills" placeholder="Python, JavaScript, HTML/CSS, Git, MATLAB" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== DOMAINE 5 : DISTINCTIONS ===== -->
+                    <div class="accordion">
+                        <div class="accordion-header active" data-target="distinctions">
+                            <span><i class="fas fa-trophy"></i> Distinctions et certificats</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </div>
+                        <div class="accordion-body open" id="distinctions">
+                            <div id="distinctionsContainer">
+                                <!-- Ajout dynamique -->
+                            </div>
+                            <button class="btn-add" id="addDistinction"><i class="fas fa-plus"></i> Ajouter une distinction</button>
+                        </div>
+                    </div>
+
+                    <!-- ===== DOMAINE 6 : LANGUES ===== -->
+                    <div class="accordion">
+                        <div class="accordion-header active" data-target="languages">
+                            <span><i class="fas fa-language"></i> Langues</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </div>
+                        <div class="accordion-body open" id="languages">
+                            <div id="languagesContainer">
+                                <!-- Ajout dynamique -->
+                            </div>
+                            <button class="btn-add" id="addLanguage"><i class="fas fa-plus"></i> Ajouter une langue</button>
+                        </div>
+                    </div>
+
+                    <!-- ===== DOMAINE 7 : CENTRES D'INTÉRÊT ===== -->
+                    <div class="accordion">
+                        <div class="accordion-header active" data-target="interests">
+                            <span><i class="fas fa-heart"></i> Centres d'intérêt</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </div>
+                        <div class="accordion-body open" id="interests">
+                            <div class="form-group">
+                                <label>Centres d'intérêt (séparés par des virgules)</label>
+                                <input type="text" id="interestsList" placeholder="Sciences, Programmation, Vulgarisation, IA" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== DOMAINE 8 : QUALITÉS ===== -->
+                    <div class="accordion">
+                        <div class="accordion-header active" data-target="qualities">
+                            <span><i class="fas fa-star"></i> Qualités personnelles</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </div>
+                        <div class="accordion-body open" id="qualities">
+                            <div class="form-group">
+                                <label>Qualités (séparées par des virgules)</label>
+                                <input type="text" id="qualitiesList" placeholder="Rigueur scientifique, Esprit analytique, Autonomie, Persévérance" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn-primary btn-full" id="btnGeneratePreview">
+                        <i class="fas fa-eye"></i> Générer l'aperçu
+                    </button>
+                </div>
+
+                <!-- ====== APERÇU ====== -->
+                <div class="preview-section">
+                    <h2><i class="fas fa-eye"></i> Aperçu du CV</h2>
+                    <div class="preview-container" id="previewContainer">
+                        <div class="cv-preview" id="cvPreview">
+                            <div class="cv-empty">
+                                <i class="fas fa-file-alt"></i>
+                                <p>Remplissez le formulaire et cliquez sur "Générer"</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-actions">
+                        <button class="btn-primary" id="btnExportPDF"><i class="fas fa-file-pdf"></i> Télécharger PDF</button>
+                        <button class="btn-secondary" id="btnPrint"><i class="fas fa-print"></i> Imprimer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 CV Builder Pro - Fait avec <i class="fas fa-heart"></i></p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
