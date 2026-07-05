@@ -303,4 +303,147 @@ function generatePreview() {
         data.languages.forEach(l => {
             html += `<div class="item"><span class="title">${l.name || 'Langue'}</span> : ${l.level || ''}</div>`;
         });
-        html += `
+        html += `</div></div>`;
+    }
+
+    // ===== CENTRES D'INTÉRÊT =====
+    if (data.interests) {
+        const interests = data.interests.split(',').map(s => s.trim()).filter(s => s);
+        html += `<div class="section"><div class="section-title">❤️ Centres d'intérêt</div><div class="section-content">`;
+        html += `<p>${interests.join(' · ')}</p>`;
+        html += `</div></div>`;
+    }
+
+    // ===== QUALITÉS =====
+    if (data.qualities) {
+        const qualities = data.qualities.split(',').map(s => s.trim()).filter(s => s);
+        html += `<div class="section"><div class="section-title">⭐ Qualités personnelles</div><div class="section-content">`;
+        html += `<p>${qualities.join(' · ')}</p>`;
+        html += `</div></div>`;
+    }
+
+    // ===== WATERMARK =====
+    html += `<div class="watermark">Créé avec CV Builder Pro</div>`;
+
+    html += `</div>`;
+    DOM.preview.innerHTML = html;
+}
+
+function getFormData() {
+    return {
+        fullName: DOM.fullName.value,
+        nationality: DOM.nationality.value,
+        birthDate: DOM.birthDate.value,
+        address: DOM.address.value,
+        email: DOM.email.value,
+        phone: DOM.phone.value,
+        links: DOM.links.value,
+        objective: DOM.objectiveText.value,
+        contests: DOM.contests.value,
+        specializations: DOM.specializations.value,
+        techSkills: DOM.techSkills.value,
+        interests: DOM.interestsList.value,
+        qualities: DOM.qualitiesList.value,
+        education: state.education,
+        distinctions: state.distinctions,
+        languages: state.languages
+    };
+}
+
+// ========== EXPORT PDF ==========
+DOM.btnExport.addEventListener('click', () => {
+    const element = document.getElementById('cvPreview');
+    if (!element || element.innerHTML.includes('Remplissez le formulaire')) {
+        alert('Veuillez d\'abord générer votre CV !');
+        return;
+    }
+    
+    const opt = {
+        margin: [0.4, 0.4, 0.4, 0.4],
+        filename: 'CV.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+    };
+    
+    html2pdf().set(opt).from(element).save();
+});
+
+// ========== IMPRIMER ==========
+DOM.btnPrint.addEventListener('click', () => {
+    window.print();
+});
+
+// ========== INIT ==========
+setTimeout(() => {
+    // Ajouter des exemples par défaut (comme dans ton CV)
+    document.getElementById('addEducation').click();
+    document.getElementById('addEducation').click();
+    document.getElementById('addDistinction').click();
+    document.getElementById('addDistinction').click();
+    document.getElementById('addDistinction').click();
+    document.getElementById('addLanguage').click();
+    document.getElementById('addLanguage').click();
+    
+    // Remplir les champs avec tes infos
+    DOM.fullName.value = 'Hamza Margal';
+    DOM.nationality.value = 'Marocaine';
+    DOM.birthDate.value = '29/05/2006';
+    DOM.address.value = 'Dyar al alya GH5 IMM1 Étage 4 APP18 Beni Yakhlaf, Mohammedia';
+    DOM.email.value = 'hamzamargal2005@gmail.com';
+    DOM.phone.value = '+212 781254076';
+    DOM.links.value = 'GitHub: HamzaBey · LinkedIn: Hamza Margal';
+    DOM.objectiveText.value = 'Étudiant en classes préparatoires scientifiques (CPGE), je souhaite poursuivre une formation d\'ingénieur en France afin d\'approfondir mes compétences scientifiques (mathématiques, physique, informatique) et de me préparer à des carrières à forte valeur technologique et scientifique.';
+    DOM.contests.value = 'CCINP, Concours commun Mines-Pont';
+    DOM.specializations.value = 'Mathématiques · Physique · Chimie · Informatique · SI';
+    DOM.techSkills.value = 'Python, JavaScript, HTML/CSS, Git, MATLAB';
+    DOM.interestsList.value = 'Sciences et technologies, Vulgarisation scientifique, Programmation et résolution de problèmes, Informatique, IA';
+    DOM.qualitiesList.value = 'Rigueur scientifique, Esprit analytique, Autonomie et persévérance, Capacité de travail intensive, Capacité de gérer les travaux en groupes';
+    
+    // Mettre à jour les items avec les vraies données
+    setTimeout(() => {
+        // Formation
+        const eduItems = document.querySelectorAll('.education-item');
+        if (eduItems.length >= 2) {
+            const inputs1 = eduItems[0].querySelectorAll('input');
+            inputs1[0].value = 'CPGE MP et président BDE';
+            inputs1[1].value = 'Lycée technique Mohammedia (LTM) · Mohammedia';
+            inputs1[2].value = '2025-2026';
+            
+            const inputs2 = eduItems[1].querySelectorAll('input');
+            inputs2[0].value = 'CPGE MPSI';
+            inputs2[1].value = 'Lycée technique Mohammedia (LTM) · Mohammedia';
+            inputs2[2].value = '2024-2025';
+        }
+        
+        // Distinctions
+        const distItems = document.querySelectorAll('.distinction-item');
+        if (distItems.length >= 3) {
+            const d1 = distItems[0].querySelectorAll('input');
+            d1[0].value = 'Bac SM A Mention Très Bien';
+            d1[1].value = '2024';
+            
+            const d2 = distItems[1].querySelectorAll('input');
+            d2[0].value = 'Certificat d\'éloquence et d\'argumentation en arabe - 1ER PRIX';
+            d2[1].value = '2023';
+            
+            const d3 = distItems[2].querySelectorAll('input');
+            d3[0].value = 'Certificat Tajwid - 1ER PRIX';
+            d3[1].value = '2022';
+        }
+        
+        // Langues
+        const langItems = document.querySelectorAll('.language-item');
+        if (langItems.length >= 2) {
+            const l1 = langItems[0].querySelectorAll('input');
+            l1[0].value = 'Arabe';
+            l1[1].value = 'langue maternelle';
+            
+            const l2 = langItems[1].querySelectorAll('input');
+            l2[0].value = 'Français';
+            l2[1].value = 'langue d\'enseignement scientifique';
+        }
+        
+        generatePreview();
+    }, 200);
+}, 100);
